@@ -1,6 +1,8 @@
+#importing library
 from app import db
 import uuid
 
+#creating address fields
 class Address(db.Model):
     __tablename__ = "address"
     id = db.Column(db.Integer, primary_key=True)
@@ -12,6 +14,7 @@ class Address(db.Model):
     country = db.Column(db.String)
     pin_code = db.Column(db.String)
 
+    #creating adresss
     @staticmethod
     def create(user_id, house_number, city, state, country, pin_code):
         address_dict = dict(
@@ -26,7 +29,8 @@ class Address(db.Model):
         address_obj = Address(**address_dict)
         db.session.add(address_obj)
         db.session.commit()
-
+        
+    #function for updating address
     def update(self, **details_dict):
         for k,v in details_dict.items():
             setattr(self, k, v)
