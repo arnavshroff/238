@@ -1,6 +1,7 @@
 from app import db
 import uuid
 
+#fetching products
 class Products(db.Model):
     __tablename__ = "products"
     id = db.Column(db.Integer, primary_key=True)
@@ -24,7 +25,7 @@ class Products(db.Model):
         product_obj = Products(**product_dict)
         db.session.add(product_obj)
         db.session.commit()
-
+    #updating products
     def update(self, **details_dict):
         for k,v in details_dict.items():
             setattr(self, k, v)
