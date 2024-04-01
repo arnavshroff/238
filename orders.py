@@ -1,9 +1,11 @@
+#importing files and libraries
 from app import db
 import uuid
 
 from app.models.products import Products
 from app.models.address import Address
 
+#fetching orders
 class Orders(db.Model):
     __tablename__ = "orders"
     id = db.Column(db.Integer, primary_key=True)
@@ -29,7 +31,7 @@ class Orders(db.Model):
         order_obj = Orders(**order_dict)
         db.session.add(order_obj)
         db.session.commit()
-
+    #updating orders
     def update(self, **details_dict):
         for k,v in details_dict.items():
             setattr(self, k, v)
