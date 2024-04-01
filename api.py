@@ -1,3 +1,4 @@
+#importing libraries
 from flask import Blueprint, jsonify, request, session, redirect, url_for, send_file
 from app.models.users import Users
 from app.models.address import Address
@@ -10,9 +11,10 @@ import os
 api = Blueprint('api', __name__, url_prefix="/api")
 
 UPLOAD_FOLDER = os.path.abspath("app/static/attachments")
-
+#login protocol
 @api.route('/login', methods=['POST'])
 def login():
+    #checking if email-password match
     try:
         email = request.json.get('email')
         password = request.json.get('password')
@@ -60,6 +62,7 @@ def logout():
         }), 400
 
 @api.route("/add-address", methods=["POST"])
+#adding address
 def add_address():
     try:
         house_number = request.json.get("house_number")
@@ -124,7 +127,7 @@ def submit_help():
 @api.route("/download/<path:filename>")
 def download(filename):
     return send_file(os.path.join(UPLOAD_FOLDER, filename), as_attachment=True)
-
+#searching for the order
 @api.route("/search-order")
 def search_order():
     order_id = request.args.get("order_id")
@@ -141,7 +144,7 @@ def search_order():
         "status": "success",
         "orders": orders
     }), 200
-
+#executing results
 @api.route("/execute", methods=["POST"])
 def execute():
     try:
@@ -168,7 +171,7 @@ def execute():
             "status": "error",
             "message": str(e)
         }), 400
-
+#fetching customer details
 @api.route("/get-customer")
 def get_customer():
     try:
