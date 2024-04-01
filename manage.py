@@ -1,3 +1,4 @@
+#importing libraries
 from flask.cli import FlaskGroup
 from app import create_app, db
 from flask import current_app
@@ -16,7 +17,7 @@ from app.models.editor.company_orders import CompanyOrders
 from app.models.editor.order_item import OrderItems
 
 cli = FlaskGroup(create_app=create_app)
-
+#user details
 user_json = [
 	{
 		"name": "John Doe",
@@ -109,7 +110,7 @@ user_json = [
 		"contact": "+250 782 980 146"
 	}
 ]
-
+#product details
 product_json = [
 	{
 		"name": "Sergeant Rodog AI",
@@ -189,7 +190,7 @@ product_json = [
 		"selling_price": "9.49"
 	}
 ]
-
+#recreating database
 def recreate_db():
 	db.drop_all()
 	db.create_all()
